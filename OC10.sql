@@ -40,3 +40,23 @@ select r.review_rate, r.review_com,i.item_title from Review r
 inner join items i on i.item_id = r.[item.id]
 inner join OrderDetails od on od.item_id = i.item_id
 inner join Orders o on o.order_id = od.order_id
+
+
+select i.item_title as Title,r.review_rate as Rating,r.review_com as Comment,c.cus_name as c_name from Review r
+inner join OrderDetails od on od.item_id = r.[item.id]
+inner join Orders o on o.order_id = od.order_id
+inner join items i on i.item_id = od.item_id
+inner join Customers c on c.cus_id = o.order_id
+
+select c.cus_name as c_name, o.order_date as o_date, o.order_add as ship_address from Customers c
+inner join Orders o on o.cus_id = c.cus_id
+
+
+select i.item_title as title, od.od_qty as [Quantity Ordered], o.order_date as [Date Ordered] from Orders o
+inner join OrderDetails od on od.order_id = o.order_id
+right outer join items i on i.item_id = od.item_id
+where od.od_qty is not null or o.order_date is not null
+
+
+
+
